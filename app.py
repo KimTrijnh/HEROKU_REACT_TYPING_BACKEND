@@ -74,8 +74,7 @@ class Score(db.Model):
 @app.route('/excerpt/random', methods=['GET', 'POST'])
 def get_ex():
     exs = Excerpt.query.all()
-    # random_num = math.floor(random.random()*len(exs))
-    random_num=0
+    random_num = math.floor(random.random()*len(exs))
     random_ex = exs[random_num]
     score_count = Score.query.filter_by(excerpt_id=random_ex.id).count()
     top_scores = Score.query.filter_by(excerpt_id=random_ex.id).order_by(Score.wpm.desc()).limit(3).all()
