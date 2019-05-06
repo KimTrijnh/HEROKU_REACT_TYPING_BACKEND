@@ -4,18 +4,19 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
 
-POSTGRES = {
-    'user': os.getenv('PSQL_USER'),
-    'pw': os.getenv('PSQL_PWD'),
-    'db': os.getenv('PSQL_DB'),
-    'host': os.getenv('PSQL_HOST'),
-    'port': os.getenv('PSQL_PORT'),
-}
+# POSTGRES = {
+#     'user': os.getenv('PSQL_USER'),
+#     'pw': os.getenv('PSQL_PWD'),
+#     'db': os.getenv('PSQL_DB'),
+#     'host': os.getenv('PSQL_HOST'),
+#     'port': os.getenv('PSQL_PORT'),
+# }
 
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY '] = 'abc'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
