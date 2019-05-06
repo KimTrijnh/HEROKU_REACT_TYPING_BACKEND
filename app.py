@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template,redirect, url_for
+from flask import Flask, jsonify, request, render_template,redirect, url_for, flash
 import os, random, math, psycopg2
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -14,7 +14,9 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-app.config['SECRET_KEY '] = 'abc'
+app.secret_key = os.environ['SECRET_KEY']
+
+app.config['SECRET_KEY '] = os.getenv('SECRET_KEY')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -99,6 +101,13 @@ def create_score():
             topScores.append({"score": {"id": score.id , "value": score.wpm }})
         return jsonify({'message':'score created', 'wpm': score.wpm, 'ranking': ranking , 'total_score': total_score, 'top_scores': topScores, 'congra' : congra }), 200
     return render_template('create_score.html', num=num)
+
+@app.route('/admin/add_excerpt', methods=['GET', 'POST'])
+def add_excerpt():
+    if request.method == 'POST':
+        create_excerpt(request.form['text'])
+        flash('an excerpt is created')
+    return render_template('add_ex.html')
 
 
 def create_excerpt(text):

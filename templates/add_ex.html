@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Add More Excerpt</h1>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<form method="POST">
+<p>
+    <textarea name="text" placeholder="excerpt text go here"></textarea>
+</p>
+
+<button type="submit">Submit</button>
+</form>
+    {% endblock %}
