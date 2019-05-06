@@ -14,7 +14,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-app.secret_key = os.environ['SECRET_KEY']
+app.secret_key = os.getenv('SECRET_KEY')
 
 app.config['SECRET_KEY '] = os.getenv('SECRET_KEY')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
