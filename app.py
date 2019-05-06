@@ -107,3 +107,5 @@ def create_excerpt(text):
     e = Excerpt(text=text)
     db.session.add(e)
     db.session.commit()
+
+
