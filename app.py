@@ -75,9 +75,8 @@ class Score(db.Model):
 def get_ex():
     exs = Excerpt.query.all()
     random_num = math.floor(random.random()*len(exs))
-    random_ex = exs[random_num]
-    score_count = Score.query.filter_by(excerpt_id=random_ex.id).count()
-    top_scores = Score.query.filter_by(excerpt_id=random_ex.id).order_by(Score.wpm.desc()).limit(3).all()
+    score_count = Score.query.filter_by(excerpt_id=exs[random_num].id).count()
+    top_scores = Score.query.filter_by(excerpt_id=exs[random_num].id).order_by(Score.wpm.desc()).limit(3).all()
     scores = []
     for score in top_scores:
         scores.append({"score": {"id": score.id , "value": score.wpm }})
