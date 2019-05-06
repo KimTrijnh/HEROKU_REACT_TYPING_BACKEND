@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Create Score</h1>
+<p>will return a json for frontend render</p>
+<form method="POST">
+<p>
+    <input name="excerpt_id" placeholder="excerpt_id">
+    <small>Only enter id from 1 - {{ num }}</small>
+</p>
+<p>
+<input name="wpm" placeholder="wpm">
+</p>
+<button type="submit">Submit</button>
+</form>
+    {% endblock %}

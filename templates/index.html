@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1> LAB: REACT + PYTHON TYPING TEST</h1>
+<ul>
+<li>
+    <a href={{url_for("list")}}>list</a>
+
+</li>
+<li>
+    <a href={{ url_for("get_ex") }}>excerpt/random</a>       
+</li>
+<li>
+    <a href={{ url_for("create_score") }}>admin/create_score</a>
+</li>
+</ul>
+{% endblock %}
