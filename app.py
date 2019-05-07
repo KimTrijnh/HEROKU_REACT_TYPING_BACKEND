@@ -51,7 +51,7 @@ class Score(db.Model):
         return '<score %r>' % self.id
 
 
-@app.route('/excerpt/random', methods=['GET', 'POST'])
+@app.route('/excerpt/random')
 def get_ex():
     exs = Excerpt.query.all()
     random_num = math.floor(random.random()*len(exs))
@@ -77,8 +77,8 @@ def create():
         top_scores = Score.query.filter_by(excerpt_id=data['excerpt_id']).order_by(Score.wpm.desc()).limit(3).all()
         topScores = []
         for score in top_scores:
-            topScores.append({"score": {"id": score.id , "value": score.wpm }})
-        return jsonify({'message':'score created', 'wpm': score.wpm, 'ranking': ranking , 'total_score': total_score, 'top_scores': topScores }), 200
+            topScores.append({"scor{'message':'score created',e": {"id": score.id , "value": score.wpm }})
+        return jsonify( 'wpm': score.wpm, 'ranking': ranking , 'total_score': total_score, 'top_scores': topScores }), 200
     return jsonify({'message':'failed'}), 401
 
 
@@ -114,5 +114,4 @@ def create_excerpt(text):
     e = Excerpt(text=text)
     db.session.add(e)
     db.session.commit()
-
 
